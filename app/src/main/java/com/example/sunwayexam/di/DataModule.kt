@@ -1,8 +1,8 @@
 package com.example.sunwayexam.di
 
 import com.example.sunwayexam.data.api.ApiService
-import com.example.sunwayexam.data.api.TravelTaipeiRepository
-import com.example.sunwayexam.data.api.TravelTaipeiRepositoryImpl
+import com.example.sunwayexam.data.TravelTaipeiRepository
+import com.example.sunwayexam.data.TravelTaipeiRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -20,7 +20,6 @@ abstract class RepositoryModule {
     @Singleton
     @Binds
     abstract fun bindOpenDataRepository(repository: TravelTaipeiRepositoryImpl): TravelTaipeiRepository
-
 }
 
 @Module

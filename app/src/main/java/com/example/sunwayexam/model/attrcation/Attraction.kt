@@ -1,7 +1,6 @@
 package com.example.sunwayexam.model.attrcation
 
 
-import android.media.Image
 import com.google.gson.annotations.SerializedName
 
 data class Attraction(
@@ -30,7 +29,7 @@ data class Attraction(
     @SerializedName("introduction")
     val introduction: String,
     @SerializedName("links")
-    val links: List<Any>,
+    val links: List<Link>,
     @SerializedName("modified")
     val modified: String,
     @SerializedName("months")
@@ -54,7 +53,7 @@ data class Attraction(
     @SerializedName("staytime")
     val staytime: String,
     @SerializedName("target")
-    val target: List<Any>,
+    val target: List<Target>,
     @SerializedName("tel")
     val tel: String,
     @SerializedName("ticket")
