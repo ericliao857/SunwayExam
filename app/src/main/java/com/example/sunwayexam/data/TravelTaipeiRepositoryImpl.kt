@@ -5,7 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.example.sunwayexam.data.api.ApiService
 import com.example.sunwayexam.data.paging.AttractionPagingSource
-import com.example.sunwayexam.model.attrcation.Attraction
+import com.example.sunwayexam.model.attraction.Attraction
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

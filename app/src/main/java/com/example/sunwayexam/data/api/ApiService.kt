@@ -1,7 +1,7 @@
 package com.example.sunwayexam.data.api
 
 import com.example.sunwayexam.model.ApiBean
-import com.example.sunwayexam.model.attrcation.Attraction
+import com.example.sunwayexam.model.attraction.Attraction
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Path

@@ -1,7 +1,7 @@
 package com.example.sunwayexam.utils
 
-import com.example.sunwayexam.model.attrcation.AttractionUiModel
-import com.example.sunwayexam.model.attrcation.Image
+import com.example.sunwayexam.model.attraction.AttractionUiModel
+import com.example.sunwayexam.model.attraction.Image
 
 object TestCaseUtils {
 
@@ -31,5 +31,6 @@ object TestCaseUtils {
             Image(src = "https://www.travel.taipei/image/222960", subject = "", ext = ".jpg")
         ),
         modified = "2024-05-26 05:01:57 +08:00",
+        url = "https://www.travel.taipei/zh-tw/attraction/details/23"
     )
 }

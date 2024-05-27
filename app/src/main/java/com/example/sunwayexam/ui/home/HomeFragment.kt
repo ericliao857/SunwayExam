@@ -13,8 +13,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.paging.map
 import com.example.sunwayexam.databinding.FragmentHomeBinding
+import com.example.sunwayexam.model.attraction.Attraction
+import com.example.sunwayexam.model.attraction.AttractionUiModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -34,12 +37,20 @@ class HomeFragment : Fragment() {
                 MaterialTheme {
                     HomeScreen(
                         onItemClick = {
-                            // todo: goto detail page
+                            goToDetail(it)
                         }
                     )
                 }
             }
         }
+    }
+
+    /**
+     * 前往詳細說明頁面
+     */
+    private fun goToDetail(attraction: AttractionUiModel) {
+        val direction = HomeFragmentDirections.actionNavHomeToDetail(attraction = attraction)
+        findNavController().navigate(direction)
     }
 
 }

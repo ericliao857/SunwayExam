@@ -4,5 +4,7 @@
     <string name="attraction_image_content_description">旅遊景點照片</string>
     <string name="goto_content_description">前往</string>
 
+    <string name="address">地址</string>
+    <string name="last_update_time">最後更新時間</string>
     <string name="menu_home">Home</string>
 </resources>

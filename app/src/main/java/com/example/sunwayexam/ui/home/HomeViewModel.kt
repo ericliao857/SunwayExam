@@ -7,8 +7,8 @@ import androidx.paging.cachedIn
 import androidx.paging.map
 import com.example.sunwayexam.data.TravelTaipeiRepository
 import com.example.sunwayexam.data.toUiModel
-import com.example.sunwayexam.model.attrcation.Attraction
-import com.example.sunwayexam.model.attrcation.AttractionUiModel
+import com.example.sunwayexam.model.attraction.Attraction
+import com.example.sunwayexam.model.attraction.AttractionUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch

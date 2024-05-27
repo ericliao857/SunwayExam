@@ -1,4 +1,4 @@
-package com.example.sunwayexam.model.attrcation
+package com.example.sunwayexam.model.attraction
 
 
 import com.google.gson.annotations.SerializedName

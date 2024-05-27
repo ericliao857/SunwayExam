@@ -1,9 +1,9 @@
-package com.example.sunwayexam.model.attrcation
+package com.example.sunwayexam.model.attraction
 
 
 import com.google.gson.annotations.SerializedName
 
-data class Category(
+data class Service(
     @SerializedName("id")
     val id: Int,
     @SerializedName("name")

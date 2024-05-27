@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.sunwayexam.data.api.ApiService
-import com.example.sunwayexam.model.attrcation.Attraction
+import com.example.sunwayexam.model.attraction.Attraction
 import retrofit2.HttpException
 import java.io.IOException
 
