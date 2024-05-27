@@ -97,7 +97,7 @@ fun DetailScreenContent(
                     content = modified
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                URLTextView(webUrl = url)
+                URLTextView(webUrl = officialSite, urlClick = openWebView)
             }
         }
     }
@@ -148,7 +148,8 @@ fun LabelAndContentView(
 
 @Composable
 fun URLTextView(
-    webUrl: String
+    webUrl: String,
+    urlClick: (url: String) -> Unit
 ) {
     val tag = "URL"
     val annotatedString = buildAnnotatedString {
@@ -172,7 +173,7 @@ fun URLTextView(
                 start = offset,
                 end = offset
             ).firstOrNull()?.let {
-                Log.d("policy URL", it.item)
+                urlClick(it.item)
             }
         })
 }
@@ -214,7 +215,8 @@ fun LabelAndContentViewPreview() {
 fun URLTextViewPreview() {
     MaterialTheme {
         URLTextView(
-            webUrl = TestCaseUtils.testAttractionUiModel.url
+            webUrl = TestCaseUtils.testAttractionUiModel.officialSite,
+            urlClick = { }
         )
     }
 }

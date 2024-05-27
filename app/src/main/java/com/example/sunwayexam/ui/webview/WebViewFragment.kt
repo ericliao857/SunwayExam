@@ -1,45 +1,32 @@
-package com.example.sunwayexam.ui.detail
+package com.example.sunwayexam.ui.webview
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.material.MaterialTheme
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 
-const val ARG_ATTRACTION = "attraction" // 旅遊景點
-
 @AndroidEntryPoint
-class DetailFragment : Fragment() {
+class WebViewFragment: Fragment() {
+    private val args: WebViewFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         return ComposeView(requireContext()).apply {
-            // Dispose of the Composition when the view's LifecycleOwner
-            // is destroyed
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
                 MaterialTheme {
-                    DetailScreen(
-                        openWebView = {
-                            goToWebView(it)
-                        }
-                    )
+                    WebViewScreen(url = args.url)
                 }
             }
         }
-    }
-
-    private fun goToWebView(url: String) {
-        val direction = DetailFragmentDirections.actionNavDetailToNavWebView(url)
-        findNavController().navigate(direction)
     }
 }

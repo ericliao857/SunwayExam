@@ -9,18 +9,11 @@ import kotlinx.parcelize.Parcelize
  */
 @Parcelize
 data class AttractionUiModel(
-    @SerializedName("id")
     val id: Int,
-    @SerializedName("name")
     val name: String,
-    @SerializedName("introduction")
     val introduction: String,
-    @SerializedName("address")
     val address: String,
-    @SerializedName("images")
     val images: List<Image>,
-    @SerializedName("modified")
     val modified: String,
-    @SerializedName("url")
-    val url: String
+    val officialSite: String
 ): Parcelable

@@ -13,6 +13,7 @@ fun Attraction.toUiModel() = AttractionUiModel(
     address = address,
     images = images,
     modified = modified,
-    url = url
+    // Android 不建議使用http
+    officialSite = officialSite.replace("http://", "https://")
 )
 fun List<Attraction>.toUiModel() = map(Attraction::toUiModel)
