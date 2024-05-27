@@ -1,9 +1,13 @@
 package com.example.sunwayexam.ui.home
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.sunwayexam.data.api.TravelTaipeiRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class HomeViewModel : ViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject constructor(
+    private val repository: TravelTaipeiRepository
+) : ViewModel() {
 
 }
