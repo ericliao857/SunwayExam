@@ -3,6 +3,8 @@
     <string name="change_language">Change Language</string>
     <string name="attraction_image_content_description">旅遊景點照片</string>
     <string name="goto_content_description">前往</string>
+    <string name="error_load_attraction">讀取旅遊景點資料失敗</string>
+    <string name="retry">重試</string>
 
     <string name="address">地址</string>
     <string name="last_update_time">最後更新時間</string>

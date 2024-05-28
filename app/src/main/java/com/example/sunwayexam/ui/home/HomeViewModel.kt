@@ -24,7 +24,6 @@ class HomeViewModel @Inject constructor(
     init {
         pagingDataFlow = repository.getAttractionSteam("zh-tw")
             .map { pagingDate -> pagingDate.map(Attraction::toUiModel) }
-            .catch { e -> e.printStackTrace() }
             .cachedIn(viewModelScope)
     }
 }

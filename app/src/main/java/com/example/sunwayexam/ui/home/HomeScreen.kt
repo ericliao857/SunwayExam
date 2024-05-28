@@ -13,11 +13,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.LinearProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.runtime.Composable
@@ -28,14 +31,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.CombinedLoadStates
+import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
@@ -44,6 +52,7 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.example.sunwayexam.R
 import com.example.sunwayexam.model.attraction.AttractionUiModel
 import com.example.sunwayexam.utils.TestCaseUtils.testAttractionUiModel
+import com.example.sunwayexam.utils.pagingLoadStateItem
 
 @Composable
 fun HomeScreen(
@@ -74,10 +83,42 @@ fun HomeScreenContent(
     items: LazyPagingItems<AttractionUiModel>,
     onItemClick: (AttractionUiModel) -> Unit
 ) {
+    when (items.loadState.refresh) {
+        LoadState.Loading -> {
+            LoadingView(
+                modifier = modifier.padding(top = 1.dp)
+            )
+        }
 
+        is LoadState.Error -> {
+            ErrorView(loadState = items.loadState.refresh) {
+                items.retry()
+            }
+        }
+
+        else -> {
+            PagingView(
+                modifier = modifier,
+                items = items,
+                onItemClick = onItemClick
+            )
+        }
+    }
+}
+
+@Composable
+fun PagingView(
+    modifier: Modifier = Modifier,
+    items: LazyPagingItems<AttractionUiModel>,
+    onItemClick: (AttractionUiModel) -> Unit
+) {
     LazyColumn(
         modifier = modifier
     ) {
+        headerView(
+            loadState = items.loadState,
+            retry = { items.retry() }
+        )
         items(
             items.itemCount,
             key = items.itemKey { it.id },
@@ -89,10 +130,41 @@ fun HomeScreenContent(
                     attractionUiModel = it,
                     onItemClick
                 )
-
             }
         }
+        // footer
+        footerView(
+            loadState = items.loadState,
+            retry = { items.retry() }
+        )
     }
+}
+
+// Paging Header
+fun LazyListScope.headerView(
+    loadState: CombinedLoadStates,
+    retry: () -> Unit
+) {
+    // header
+    pagingLoadStateItem(
+        loadState = loadState.prepend,
+        keySuffix = "prepend",
+        loading = { LoadingView() },
+        error = { ErrorView(loadState = it, retry = retry) },
+    )
+}
+
+// Paging Footer
+fun LazyListScope.footerView(
+    loadState: CombinedLoadStates,
+    retry: () -> Unit
+) {
+    pagingLoadStateItem(
+        loadState = loadState.append,
+        keySuffix = "append",
+        loading = { LoadingView() },
+        error = { ErrorView(loadState = it, retry = retry) },
+    )
 }
 
 @Composable
@@ -167,6 +239,47 @@ fun AttractionItem(
     }
 }
 
+@Composable
+fun LoadingView(
+    modifier: Modifier = Modifier
+) {
+    LinearProgressIndicator(
+        modifier = modifier
+            .fillMaxWidth()
+            .height(4.dp),
+        color = colorResource(id = R.color.teal_200)
+    )
+}
+
+@Composable
+fun ErrorView(
+    modifier: Modifier = Modifier,
+    loadState: LoadState? = null,
+    retry: () -> Unit
+) {
+    Column(
+        modifier = modifier.fillMaxWidth()
+    ) {
+        Text(
+            text = stringResource(id = R.string.error_load_attraction),
+            fontSize = 14.sp,
+            textAlign = TextAlign.Center,
+            modifier = modifier.fillMaxWidth()
+        )
+        TextButton(
+            onClick = { retry() },
+            modifier = Modifier.align(Alignment.CenterHorizontally)
+        ) {
+            Text(
+                text = stringResource(id = R.string.retry),
+                fontSize = 14.sp,
+                textAlign = TextAlign.Center
+            )
+        }
+    }
+
+}
+
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun ImageUi(
@@ -193,6 +306,16 @@ fun AttractionItemPreview() {
         AttractionItem(
             attractionUiModel = testAttractionUiModel,
             onItemClick = { }
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ErrorViewPreview() {
+    MaterialTheme {
+        ErrorView(
+            retry = { }
         )
     }
 }

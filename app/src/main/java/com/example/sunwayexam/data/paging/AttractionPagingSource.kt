@@ -31,7 +31,6 @@ class AttractionPagingSource(
                 // ensure we're not requesting duplicating items, at the 2nd request
                 position + 1
             }
-            Log.d("TAG", "load: $response")
             LoadResult.Page(
                 data = attractions,
                 prevKey = if (position == STARTING_PAGE_INDEX) null else position - 1,
