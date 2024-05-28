@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/nav_detail"
         android:name="com.example.sunwayexam.ui.detail.DetailFragment"
-        android:label="DetailFragment">
+        android:label="@string/attraction">
 
         <argument
             android:name="attraction"
@@ -25,15 +25,25 @@
         <action
             android:id="@+id/action_nav_detail_to_nav_web_view"
             app:destination="@id/nav_web_view" />
+        <argument
+            android:name="title"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/nav_web_view"
         android:name="com.example.sunwayexam.ui.webview.WebViewFragment"
-        android:label="WebViewFragment">
+        android:label="@string/attraction_web">
 
         <argument
             android:name="url"
             app:argType="string" />
+        <argument
+            android:name="title"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 
 </navigation>

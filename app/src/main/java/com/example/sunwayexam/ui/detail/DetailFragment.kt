@@ -29,8 +29,8 @@ class DetailFragment : Fragment() {
             setContent {
                 MaterialTheme {
                     DetailScreen(
-                        openWebView = {
-                            goToWebView(it)
+                        openWebView = { url, title ->
+                            goToWebView(url, title)
                         }
                     )
                 }
@@ -38,8 +38,9 @@ class DetailFragment : Fragment() {
         }
     }
 
-    private fun goToWebView(url: String) {
-        val direction = DetailFragmentDirections.actionNavDetailToNavWebView(url)
+    private fun goToWebView(url: String, title: String) {
+        val direction = DetailFragmentDirections
+            .actionNavDetailToNavWebView(url = url, title = title)
         findNavController().navigate(direction)
     }
 }

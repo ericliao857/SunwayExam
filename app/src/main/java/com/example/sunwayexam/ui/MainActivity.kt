@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
             )
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
-        navController.addOnDestinationChangedListener { _, destination, _ ->
+        navController.addOnDestinationChangedListener { _, destination, bundle ->
             if (destination.id == R.id.nav_home) {
                 binding.appBarMain.toolbar.menu.forEach {
                     it.isVisible = true
@@ -48,7 +48,11 @@ class MainActivity : AppCompatActivity() {
                     it.isVisible = false
                 }
             }
+            // 設定標題文字
+            val title = bundle?.getString("title") ?: destination.label.toString()
+            setToolbarTitle(title)
         }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -69,5 +73,9 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+    fun setToolbarTitle(title: String) {
+        binding.appBarMain.toolbar.title = title
     }
 }

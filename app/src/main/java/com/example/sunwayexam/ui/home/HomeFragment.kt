@@ -49,7 +49,8 @@ class HomeFragment : Fragment() {
      * 前往詳細說明頁面
      */
     private fun goToDetail(attraction: AttractionUiModel) {
-        val direction = HomeFragmentDirections.actionNavHomeToDetail(attraction = attraction)
+        val direction = HomeFragmentDirections
+            .actionNavHomeToDetail(attraction = attraction, title = attraction.name)
         findNavController().navigate(direction)
     }
 

@@ -44,7 +44,7 @@ import com.example.sunwayexam.utils.TestCaseUtils
 fun DetailScreen(
     modifier: Modifier = Modifier,
     viewModel: DetailViewModel = hiltViewModel(),
-    openWebView: (url: String) -> Unit
+    openWebView: (url: String, title: String) -> Unit
 ) {
     CompositionLocalProvider(
         androidx.lifecycle.compose.LocalLifecycleOwner provides androidx.compose.ui.platform.LocalLifecycleOwner.current,
@@ -67,7 +67,7 @@ fun DetailScreen(
 fun DetailScreenContent(
     modifier: Modifier = Modifier,
     attraction: AttractionUiModel?,
-    openWebView: (url: String) -> Unit
+    openWebView: (url: String, title: String) -> Unit
 ) {
     Column(
         modifier = modifier
@@ -97,7 +97,10 @@ fun DetailScreenContent(
                     content = modified
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                URLTextView(webUrl = officialSite, urlClick = openWebView)
+                URLTextView(
+                    webUrl = officialSite,
+                    urlClick = { openWebView(it, attraction.name) }
+                )
             }
         }
     }
@@ -184,7 +187,7 @@ fun DetailScreenContentPreview() {
     MaterialTheme {
         DetailScreenContent(
             attraction = TestCaseUtils.testAttractionUiModel,
-            openWebView = { }
+            openWebView = { _, _ ->  }
         )
     }
 }
