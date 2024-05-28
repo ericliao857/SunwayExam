@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="change_language">更改语言</string>
+    <string name="attraction_image_content_description">旅游景点照片</string>
+    <string name="goto_content_description">前往</string>
+    <string name="error_load_attraction">读取旅游景点资料失败</string>
+    <string name="retry">重试</string>
+
+    <string name="address">地址</string>
+    <string name="last_update_time">最后更新时间</string>
+    <string name="menu_home">旅游台北</string>
+    <string name="attraction">旅游景点信息</string>
+    <string name="attraction_web">旅游景点网站</string>
+</resources>

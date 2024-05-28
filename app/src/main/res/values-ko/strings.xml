@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="change_language" translatable="false">Change Language</string>
+    <string name="attraction_image_content_description">관광지 사진</string>
+    <string name="goto_content_description">이동</string>
+    <string name="error_load_attraction">관광지 데이터를 불러오지 못했습니다</string>
+    <string name="retry">재시도</string>
+
+    <string name="address">주소</string>
+    <string name="last_update_time">최종 업데이트 시간</string>
+    <string name="menu_home">타이베이 여행</string>
+    <string name="attraction">관광지 정보</string>
+    <string name="attraction_web">관광지 웹사이트</string>
+</resources>

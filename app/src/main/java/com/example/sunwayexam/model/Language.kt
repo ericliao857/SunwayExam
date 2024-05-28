@@ -13,16 +13,18 @@ package com.example.sunwayexam.model
  */
 enum class Language(
     val languageCode: String,
-    val languageName: String
+    val languageName: String,
+    val languageLocaleCode: String,
+    val countryCode: String = ""
 ) {
-    ZH_TW("zh-tw", "繁體中文"),
-    ZH_CN("zh-cn", "zh-cn"),
-    EN("en", "en"),
-    JA("ja", "ja"),
-    KO("ko", "ko"),
-    ES("es", "es"),
-    ID("id", "id"),
-    TH("th", "th"),
-    VI("vi", "vi");
+    ZH_TW("zh-tw", "繁體中文", "zh", "tw"),
+    ZH_CN("zh-cn", "zh-cn", "zh", "cn"),
+    EN("en", "en", "en"),
+    JA("ja", "ja", "ja"),
+    KO("ko", "ko", "ko"),
+    ES("es", "es", "es"),
+    ID("id", "id", "in"),
+    TH("th", "th", "th"),
+    VI("vi", "vi", "vi");
 
 }

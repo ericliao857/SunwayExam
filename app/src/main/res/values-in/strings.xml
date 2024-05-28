@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="change_language" translatable="false">Change Language</string>
+    <string name="attraction_image_content_description">Gambar objek wisata</string>
+    <string name="goto_content_description">Pergi ke</string>
+    <string name="error_load_attraction">Gagal memuat data objek wisata</string>
+    <string name="retry">Coba lagi</string>
+
+    <string name="address">Alamat</string>
+    <string name="last_update_time">Waktu pembaruan terakhir</string>
+    <string name="menu_home">Jelajahi Taipei</string>
+    <string name="attraction">Informasi objek wisata</string>
+    <string name="attraction_web">Situs web objek wisata</string>
+</resources>

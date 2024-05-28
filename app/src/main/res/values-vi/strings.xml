@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="change_language" translatable="false">Change Language</string>
+    <string name="attraction_image_content_description">Hình ảnh điểm tham quan</string>
+    <string name="goto_content_description">Đi tới</string>
+    <string name="error_load_attraction">Không thể tải dữ liệu điểm tham quan</string>
+    <string name="retry">Thử lại</string>
+
+    <string name="address">Địa chỉ</string>
+    <string name="last_update_time">Thời gian cập nhật cuối</string>
+    <string name="menu_home">Du lịch Đài Bắc</string>
+    <string name="attraction">Thông tin điểm tham quan</string>
+    <string name="attraction_web">Trang web điểm tham quan</string>
+</resources>

@@ -8,6 +8,7 @@ import com.example.sunwayexam.data.api.ApiService
 import com.example.sunwayexam.data.TravelTaipeiRepository
 import com.example.sunwayexam.data.TravelTaipeiRepositoryImpl
 import com.example.sunwayexam.data.local.LanguageSharedPref
+import com.example.sunwayexam.utils.LocaleHelper
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -65,5 +66,14 @@ object AppModules {
     @Provides
     fun provideLanguageSharedPref(application: Application): LanguageSharedPref {
         return LanguageSharedPref(application)
+    }
+
+    @Singleton
+    @Provides
+    fun provideLocaleHelper(
+        application: Application,
+        languageSharedPref: LanguageSharedPref
+    ): LocaleHelper {
+        return LocaleHelper(application, languageSharedPref)
     }
 }

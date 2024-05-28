@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="change_language" translatable="false">Change Language</string>
+    <string name="attraction_image_content_description">Imagen del atractivo turístico</string>
+    <string name="goto_content_description">Ir a</string>
+    <string name="error_load_attraction">Error al cargar los datos del atractivo turístico</string>
+    <string name="retry">Reintentar</string>
+
+    <string name="address">Dirección</string>
+    <string name="last_update_time">Última hora de actualización</string>
+    <string name="menu_home">Viajar por Taipéi</string>
+    <string name="attraction">Información del atractivo turístico</string>
+    <string name="attraction_web">Sitio web del atractivo turístico</string>
+</resources>

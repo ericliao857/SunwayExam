@@ -2,14 +2,20 @@ package com.example.sunwayexam.data.local
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
+import com.example.sunwayexam.model.Language
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
+import java.util.Locale
 
 /**
  * 儲存語言設定
  */
-class LanguageSharedPref(context: Context) {
+class LanguageSharedPref(
+    context: Context,
+    private val defaultLanguage: Language = Language.ZH_TW
+) {
     private val pref: SharedPreferences by lazy {
         context.getSharedPreferences(
             PREF_NAME,
@@ -23,12 +29,18 @@ class LanguageSharedPref(context: Context) {
         }
     }
 
-    fun getLanguage(): String? {
-        return pref.getString(LANGUAGE, "zh-tw")
+    fun getLanguage(): String {
+        return pref.getString(LANGUAGE, "zh-TW") ?: defaultLanguage.languageName
     }
 
     fun getLanguageFlow(): Flow<String> {
         return pref.getStringFlow(LANGUAGE, "zh-tw")
+    }
+
+    fun getLocale(): Locale {
+        val language = Language.entries.find { it.languageCode == getLanguage() } ?: Language.ZH_TW
+        // there is no predefined way to serialize/deserialize Locale object
+        return Locale(language.languageLocaleCode, language.countryCode)
     }
 
     /**

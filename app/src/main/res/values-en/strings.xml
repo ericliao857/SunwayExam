@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SunwayExam</string>
+    <string name="change_language">Change Language</string>
+    <string name="attraction_image_content_description">Attraction Image</string>
+    <string name="goto_content_description">Go To</string>
+    <string name="error_load_attraction">Failed to Load Attraction Data</string>
+    <string name="retry">Retry</string>
+
+    <string name="address">Address</string>
+    <string name="last_update_time">Last Update Time</string>
+    <string name="menu_home">Travel Taipei</string>
+    <string name="attraction">Attraction Information</string>
+    <string name="attraction_web">Attraction Website</string>
+</resources>

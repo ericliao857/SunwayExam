@@ -4,23 +4,22 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sunwayexam.data.StorageRepository
 import com.example.sunwayexam.model.Language
-import com.example.sunwayexam.ui.detail.DetailUiState
 import com.example.sunwayexam.utils.WhileUiSubscribed
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.util.Locale
 import javax.inject.Inject
 
 data class MainUiState(
     val showDialog: Boolean = false,
-    val language: Language = Language.ZH_TW
+    val language: Language = Language.ZH_TW,
+    val changeLanguage: Locale? = null
 )
 
 @HiltViewModel
@@ -33,12 +32,15 @@ class MainViewModel @Inject constructor(
             Language.entries.find { it.languageCode == code } ?: Language.ZH_TW
         }
     private val _showDialog = MutableStateFlow(false)
+    private val _changeLanguage: MutableStateFlow<Locale?> = MutableStateFlow(null)
+
     val uiState: StateFlow<MainUiState> = combine(
-        _languageFlow, _showDialog
-    ) { language, showDialog ->
+        _languageFlow, _showDialog, _changeLanguage
+    ) { language, showDialog, newLnaguage ->
         MainUiState(
             showDialog = showDialog,
-            language = language
+            language = language,
+            changeLanguage = newLnaguage
         )
     }.stateIn(
         scope = viewModelScope,
@@ -52,6 +54,7 @@ class MainViewModel @Inject constructor(
     fun setLanguageCode(language: Language) {
         viewModelScope.launch {
             storageRepository.saveLanguageCode(language.languageCode)
+            changeNewLanguage(storageRepository.getLanguageLocale())
         }
     }
 
@@ -61,5 +64,14 @@ class MainViewModel @Inject constructor(
 
     fun showDialogMessage() {
         _showDialog.value = true
+    }
+
+    // 更改語言動作
+    fun changeLanguageFinish() {
+        _changeLanguage.value = null
+    }
+
+    private fun changeNewLanguage(locale: Locale) {
+        _changeLanguage.value = locale
     }
 }

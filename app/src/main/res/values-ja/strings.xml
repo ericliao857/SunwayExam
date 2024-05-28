@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="change_language" translatable="false">Change Language</string>
+    <string name="attraction_image_content_description">観光名所の写真</string>
+    <string name="goto_content_description">行く</string>
+    <string name="error_load_attraction">観光名所データの読み込みに失敗しました</string>
+    <string name="retry">再試行</string>
+
+    <string name="address">住所</string>
+    <string name="last_update_time">最終更新時間</string>
+    <string name="menu_home">台北を旅する</string>
+    <string name="attraction">観光名所情報</string>
+    <string name="attraction_web">観光名所のウェブサイト</string>
+</resources>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="change_language" translatable="false">Change Language</string>
+    <string name="attraction_image_content_description">ภาพสถานที่ท่องเที่ยว</string>
+    <string name="goto_content_description">ไปที่</string>
+    <string name="error_load_attraction">การโหลดข้อมูลสถานที่ท่องเที่ยวล้มเหลว</string>
+    <string name="retry">ลองใหม่</string>
+
+    <string name="address">ที่อยู่</string>
+    <string name="last_update_time">เวลาที่อัปเดตล่าสุด</string>
+    <string name="menu_home">ท่องเที่ยวไทเป</string>
+    <string name="attraction">ข้อมูลสถานที่ท่องเที่ยว</string>
+    <string name="attraction_web">เว็บไซต์สถานที่ท่องเที่ยว</string>
+</resources>

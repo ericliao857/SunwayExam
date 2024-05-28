@@ -5,6 +5,7 @@ import com.example.sunwayexam.di.DefaultDispatcher
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
+import java.util.Locale
 import javax.inject.Inject
 
 class StorageRepositoryImpl @Inject constructor(
@@ -20,6 +21,10 @@ class StorageRepositoryImpl @Inject constructor(
 
     override fun getLanguageFlow(): Flow<String> {
         return sharedPref.getLanguageFlow()
+    }
+
+    override fun getLanguageLocale(): Locale {
+        return sharedPref.getLocale()
     }
 
 }
