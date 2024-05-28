@@ -1,8 +1,13 @@
 package com.example.sunwayexam.di
 
+import android.app.Application
+import android.content.Context
+import com.example.sunwayexam.data.StorageRepository
+import com.example.sunwayexam.data.StorageRepositoryImpl
 import com.example.sunwayexam.data.api.ApiService
 import com.example.sunwayexam.data.TravelTaipeiRepository
 import com.example.sunwayexam.data.TravelTaipeiRepositoryImpl
+import com.example.sunwayexam.data.local.LanguageSharedPref
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -20,6 +25,10 @@ abstract class RepositoryModule {
     @Singleton
     @Binds
     abstract fun bindOpenDataRepository(repository: TravelTaipeiRepositoryImpl): TravelTaipeiRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindStorageRepository(repository: StorageRepositoryImpl): StorageRepository
 }
 
 @Module
@@ -50,5 +59,11 @@ object AppModules {
     @Provides
     fun providerApiService(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideLanguageSharedPref(application: Application): LanguageSharedPref {
+        return LanguageSharedPref(application)
     }
 }

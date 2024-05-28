@@ -1,25 +1,37 @@
 package com.example.sunwayexam.ui
 
+import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.GravityCompat
+import androidx.compose.ui.platform.ComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.core.view.forEach
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.sunwayexam.R
 import com.example.sunwayexam.databinding.ActivityMainBinding
+import com.example.sunwayexam.model.Language
+import com.example.sunwayexam.ui.dialog.LanguageDialogFragment
+import com.example.sunwayexam.ui.dialog.SelectCropContent
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
+    private val viewModel: MainViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +64,7 @@ class MainActivity : AppCompatActivity() {
             val title = bundle?.getString("title") ?: destination.label.toString()
             setToolbarTitle(title)
         }
-
+        observe()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -64,7 +76,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.change_language -> {
-                // TODO: Change Language
+                viewModel.showDialogMessage()
             }
         }
         return super.onOptionsItemSelected(item)
@@ -75,7 +87,42 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
-    fun setToolbarTitle(title: String) {
+    private fun observe() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    viewModel.uiState
+                        .map { it.showDialog }
+                        .distinctUntilChanged()
+                        .collect { show ->
+                            if (show) {
+                                showComposeDialog()
+                                viewModel.dialogShown()
+                            }
+                        }
+                }
+            }
+        }
+    }
+
+    /**
+     * set Toolbar title
+     */
+    private fun setToolbarTitle(title: String) {
         binding.appBarMain.toolbar.title = title
+    }
+
+    /**
+     * show change language dialog
+     */
+    private fun showComposeDialog() {
+        if (!this.isDestroyed) {
+            LanguageDialogFragment(
+                language = viewModel.uiState.value.language,
+                changeLanguage = {
+                    viewModel.setLanguageCode(it)
+                }
+            ).show(supportFragmentManager, LanguageDialogFragment.TAG)
+        }
     }
 }
