@@ -54,7 +54,7 @@ class MainViewModel @Inject constructor(
     fun setLanguageCode(language: Language) {
         viewModelScope.launch {
             storageRepository.saveLanguageCode(language.languageCode)
-            changeNewLanguage(storageRepository.getLanguageLocale())
+            changeNewLanguage(Locale(language.languageLocaleCode, language.countryCode))
         }
     }
 

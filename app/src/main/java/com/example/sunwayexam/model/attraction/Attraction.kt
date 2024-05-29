@@ -37,7 +37,7 @@ data class Attraction(
     @SerializedName("name")
     val name: String,
     @SerializedName("name_zh")
-    val nameZh: Any,
+    val nameZh: String?,
     @SerializedName("nlat")
     val nlat: Double,
     @SerializedName("official_site")
